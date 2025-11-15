@@ -10,6 +10,8 @@ export default function SecondStep({ setStep, userDetails, setUserDetails }: any
             {/* Input Form with Next Button */}
             <div className="flex flex-col gap-4">
                 <input
+                    value={userDetails.email}
+                    onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
                     type="email"
                     placeholder="Email"
                     className="w-full p-4 bg-transparent border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors duration-200 font-mono"

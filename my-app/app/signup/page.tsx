@@ -3,13 +3,16 @@ import { useState } from "react";
 import Firststep from "./components/first-step";
 import SecondStep from "./components/second-step";
 import ThirdStep from "./components/third-step";
+import LastStep from "./components/last-step";
+import Link from "next/link";
 
 export default function SignupPage() {
     const [step, setStep] = useState(0);
     const [userDetails, setUserDetails] = useState({
         username: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     });
     return (
         <div className="min-h-screen bg-black text-white font-mono">
@@ -36,12 +39,12 @@ export default function SignupPage() {
                     {/* Header with Go Back and Progress Indicator */}
                     <div className="flex justify-between items-start mb-12">
                         {/* Go Back Button - Top Left */}
-                        <button
-                            onClick={() => setStep(1)}
+                        <Link
+                            href="/"
                             className="text-gray-400 hover:text-white transition-colors duration-200 font-mono text-sm tracking-wide"
                         >
                             ← GO BACK
-                        </button>
+                        </Link>
 
                         {/* Progress Indicator - Top Right */}
                         <div className="flex flex-col gap-3">
@@ -101,6 +104,29 @@ export default function SignupPage() {
                 {/* Main Content */}
                 <div className="flex flex-col items-center justify-center min-h-[60vh]">
                     <ThirdStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
+                </div>
+            </div>}
+            {step === 4 && <div className="min-h-screen p-8">
+                {/* Header with Go Back and Progress Indicator */}
+                <div className="flex justify-between items-start mb-12">
+                    {/* Go Back Button - Top Left */}
+                    <button
+                        onClick={() => setStep(3)}
+                        className="text-gray-400 hover:text-white transition-colors duration-200 font-mono text-sm tracking-wide"
+                    >
+                        ← GO BACK
+                    </button>
+                    {/* Progress Indicator - Top Right */}
+                    <div className="flex flex-col gap-3">
+                        <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                        <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                        <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                {/* Main Content */}
+                <div className="flex flex-col items-center justify-center min-h-[60vh]">
+                    <LastStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
                 </div>
             </div>}
 

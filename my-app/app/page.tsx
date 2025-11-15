@@ -19,12 +19,12 @@ export default function Home() {
         {/* Authentication Section */}
         <div className="flex flex-col sm:flex-row gap-6 w-full max-w-md">
           {/* Login Button */}
-          <button className="flex-1 py-4 px-8 bg-transparent border border-white text-white font-medium tracking-wide transition-all duration-200 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
+          <Link href="/login" className="flex-1 py-4 px-8 bg-transparent border border-white text-white font-medium tracking-wide transition-all duration-200 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black flex items-center justify-center text-center">
             LOGIN
-          </button>
+          </Link>
 
           {/* Signup Button */}
-          <Link href="/signup" className="flex-1 py-4 px-8 bg-white text-black font-medium tracking-wide transition-all duration-200 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
+          <Link href="/signup" className="flex-1 py-4 px-8 bg-white text-black font-medium tracking-wide transition-all duration-200 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black flex items-center justify-center text-center">
             SIGN UP
           </Link>
         </div>
