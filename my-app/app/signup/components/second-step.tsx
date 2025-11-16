@@ -111,10 +111,10 @@ export default function SecondStep({
                 {/* Next Button */}
                 <button
                     onClick={() => hasAllSteps ? setStep(4) : setStep(3)}
-                    disabled={!hasAllSteps || isCheckingAvailability}
-                    className={`w-full py-4 px-8 font-medium font-mono tracking-wide transition-all duration-200 ${hasAllSteps && !isCheckingAvailability
-                            ? 'bg-white text-black hover:bg-gray-200 cursor-pointer'
-                            : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                    disabled={isCheckingAvailability}
+                    className={`w-full py-4 px-8 font-medium font-mono tracking-wide transition-all duration-200 ${!isCheckingAvailability
+                        ? 'bg-white text-black hover:bg-gray-200 cursor-pointer'
+                        : 'bg-gray-700 text-gray-400 cursor-not-allowed'
                         }`}
                 >
                     {isCheckingAvailability ? 'CHECKING...' : 'NEXT'}

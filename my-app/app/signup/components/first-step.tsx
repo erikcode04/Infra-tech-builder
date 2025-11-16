@@ -45,7 +45,9 @@ export default function Firststep({
 
             if (isAvailable) {
                 setAvailabilityStatus('available');
+                // For username step, just check if username is valid and available
                 const allInfoPresent = inspectAllInformation({ ...userDetails, username: userDetails.username });
+                console.log("All info present:", allInfoPresent);
                 setHasAllSteps(allInfoPresent);
             } else {
                 setAvailabilityStatus('taken');
@@ -58,9 +60,7 @@ export default function Firststep({
         } finally {
             setIsCheckingAvailability(false);
         }
-    };
-
-    useEffect(() => {
+    }; useEffect(() => {
         const timeoutId = setTimeout(() => {
             checkUsernameAvailability();
         }, 500); // Debounce API calls
@@ -113,13 +113,13 @@ export default function Firststep({
                 {/* Next Button */}
                 <button
                     onClick={() => hasAllSteps ? setStep(4) : setStep(2)}
-                    disabled={!hasAllSteps || isCheckingAvailability}
-                    className={`w-full py-4 px-8 font-medium font-mono tracking-wide transition-all duration-200 ${hasAllSteps && !isCheckingAvailability
-                            ? 'bg-white text-black hover:bg-gray-200 cursor-pointer'
-                            : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                    disabled={isCheckingAvailability}
+                    className={`w-full py-4 px-8 font-medium font-mono tracking-wide transition-all duration-200 ${!isCheckingAvailability
+                        ? 'bg-white text-black hover:bg-gray-200 cursor-pointer'
+                        : 'bg-gray-700 text-gray-400 cursor-not-allowed'
                         }`}
                 >
-                    {isCheckingAvailability ? 'CHECKING...' : 'NEXT'}
+                    {isCheckingAvailability ? 'CHECKING...' : hasAllSteps ? 'FINISH' : 'NEXT'}
                 </button>
             </div>
         </div>

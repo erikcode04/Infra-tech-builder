@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
     validateUsername,
     getUsernameValidationColor,
     getUsernameRequirementsList,
     UsernameValidation,
     UsernameRequirements
-} from '@/utils/username-validation';
-
-interface UsernameInputProps {
+} from '@/utils/username-validation'; interface UsernameInputProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
@@ -29,15 +27,30 @@ export default function UsernameInput({
     const [validation, setValidation] = useState<UsernameValidation | null>(null);
     const [isFocused, setIsFocused] = useState(false);
 
+    // Memoize requirements to prevent infinite re-renders
+    const memoizedRequirements = useMemo(() => requirements, [
+        requirements?.minLength,
+        requirements?.maxLength,
+        requirements?.allowNumbers,
+        requirements?.allowUnderscores,
+        requirements?.allowHyphens,
+        requirements?.requireLetters,
+        requirements?.caseSensitive,
+        JSON.stringify(requirements?.forbiddenWords) // For array comparison
+    ]);
+
     useEffect(() => {
         if (value) {
-            setValidation(validateUsername(value, requirements));
+            setValidation(validateUsername(value, memoizedRequirements));
         } else {
             setValidation(null);
         }
-    }, [value, requirements]);
+    }, [value, memoizedRequirements]);
 
-    const requirementsList = getUsernameRequirementsList(requirements);
+    const requirementsList = useMemo(() =>
+        getUsernameRequirementsList(memoizedRequirements),
+        [memoizedRequirements]
+    );
 
     return (
         <div className="w-full">
@@ -50,10 +63,10 @@ export default function UsernameInput({
                 onBlur={() => setIsFocused(false)}
                 placeholder={placeholder}
                 className={`w-full p-4 bg-transparent border text-white placeholder-gray-400 focus:outline-none transition-colors duration-200 font-mono ${validation && !validation.isValid && value
-                        ? 'border-red-400 focus:border-red-400'
-                        : validation && validation.isValid && value
-                            ? 'border-green-400 focus:border-green-400'
-                            : 'border-gray-600 focus:border-white'
+                    ? 'border-red-400 focus:border-red-400'
+                    : validation && validation.isValid && value
+                        ? 'border-green-400 focus:border-green-400'
+                        : 'border-gray-600 focus:border-white'
                     }`}
             />
 
@@ -63,7 +76,7 @@ export default function UsernameInput({
                     {validation.isValid ? (
                         <p className="text-green-400 text-sm font-mono flex items-center">
                             <span className="mr-2">✓</span>
-                            Username is available
+                            Username meets requirements
                         </p>
                     ) : (
                         <div>
