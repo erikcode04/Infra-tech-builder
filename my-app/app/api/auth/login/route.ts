@@ -8,3 +8,4 @@ export async function POST(request: NextRequest) {
     } else {
         return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
     }
+}

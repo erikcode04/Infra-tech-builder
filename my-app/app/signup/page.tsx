@@ -14,6 +14,7 @@ export default function SignupPage() {
         password: "",
         confirmPassword: ""
     });
+    const [hasAllSteps, setHasAllSteps] = useState(false);
     return (
         <div className="min-h-screen bg-black text-white font-mono">
             {step === 0 &&
@@ -57,7 +58,7 @@ export default function SignupPage() {
 
                     {/* Main Content */}
                     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                        <Firststep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
+                        <Firststep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} hasAllSteps={hasAllSteps} setHasAllSteps={setHasAllSteps} />
                     </div>
                 </div>}
             {step === 2 && <div className="min-h-screen p-8">
@@ -80,7 +81,7 @@ export default function SignupPage() {
                 </div>
                 {/* Main Content */}
                 <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <SecondStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
+                    <SecondStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} hasAllSteps={hasAllSteps} setHasAllSteps={setHasAllSteps} />
                 </div>
             </div>}
             {step === 3 && <div className="min-h-screen p-8">
@@ -103,7 +104,7 @@ export default function SignupPage() {
                 </div>
                 {/* Main Content */}
                 <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <ThirdStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
+                    <ThirdStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} hasAllSteps={hasAllSteps} setHasAllSteps={setHasAllSteps} />
                 </div>
             </div>}
             {step === 4 && <div className="min-h-screen p-8">
@@ -126,7 +127,7 @@ export default function SignupPage() {
                 </div>
                 {/* Main Content */}
                 <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <LastStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} />
+                    <LastStep setStep={setStep} userDetails={userDetails} setUserDetails={setUserDetails} hasAllSteps={hasAllSteps} setHasAllSteps={setHasAllSteps} />
                 </div>
             </div>}
 

@@ -1,7 +1,13 @@
 "use client";
 import { useState } from "react";
-
-export default function LastStep({ setStep, userDetails, setUserDetails }: any) {
+import { SignupData } from "@/app/types/signup";
+export default function LastStep({
+    setStep,
+    userDetails
+}: {
+    setStep: (step: number) => void;
+    userDetails: SignupData;
+}) {
     const [showingPassword, setShowingPassword] = useState(false);
 
     return (
@@ -13,7 +19,16 @@ export default function LastStep({ setStep, userDetails, setUserDetails }: any) 
             <div className="flex flex-col gap-4">
                 <div className="p-4 bg-transparent border border-gray-600 text-white font-mono">
                     <p><span className="font-medium">Username:</span> {userDetails.username}</p>
+                    <button onClick={() => setStep(1)} className="mt-2 text-sm text-gray-400 hover:text-white">
+                        Edit
+                    </button>
+                </div>
+                <div className="p-4 bg-transparent border border-gray-600 text-white font-mono">
+
                     <p><span className="font-medium">Email:</span> {userDetails.email}</p>
+                    <button onClick={() => setStep(2)} className="mt-2 text-sm text-gray-400 hover:text-white">
+                        Edit
+                    </button>
                 </div>
                 <div className="p-4 bg-transparent border border-gray-600 text-white font-mono">
                     <p>
@@ -23,6 +38,9 @@ export default function LastStep({ setStep, userDetails, setUserDetails }: any) 
                             {showingPassword ? "Hide" : "Show"}
                         </button>
                     </p>
+                    <button onClick={() => setStep(3)} className="mt-2 text-sm text-gray-400 hover:text-white">
+                        Edit
+                    </button>
                 </div>
                 <button onClick={() => alert("Signup Complete!")} className="py-4 px-8 bg-white text-black font-medium font-mono tracking-wide hover:bg-gray-200 transition-all duration-200">
                     CONFIRM
