@@ -10,7 +10,7 @@ export async function userDetailGuard(details: { username?: string; email?: stri
     if (!details.username && !details.email) {
         return false; // Guard fails if username or email is missing
     }
-
+    console.log("Checking user detail guard with details:", details);
     try {
         // Method 1: Pass as separate query parameters (recommended)
         const response = await axios.get('/api/account-building/busy-details', {
